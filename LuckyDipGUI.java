@@ -23,6 +23,7 @@ import javax.swing.BoxLayout;
 import java.awt.Insets;
 import java.awt.RenderingHints;
 import java.awt.Graphics2D;
+import java.util.Collections;
 
 public class LuckyDipGUI extends JPanel {
 	
@@ -105,8 +106,10 @@ public class LuckyDipGUI extends JPanel {
 		
 		@Override
 		public List<Integer> generateNumbers() {
-			List<Integer> mainNumbers = HelperMethods.getRandomNumbers(5,1,50);
-			List<Integer> luckyStars = HelperMethods.getRandomNumbers(2,1,12);
+			List<Integer> mainNumbers = HelperMethods.getRandomNumbers(5,1,50); // 5 numbers from 1-50
+			Collections.sort(mainNumbers);
+			List<Integer> luckyStars = HelperMethods.getRandomNumbers(2,1,12); // 2 lucky stars from 1-12
+			Collections.sort(luckyStars);
 			List<Integer> newList = new ArrayList<>();
 			newList.addAll(mainNumbers);
 			newList.addAll(luckyStars);
@@ -124,8 +127,9 @@ public class LuckyDipGUI extends JPanel {
 		
 		@Override
 		public List<Integer> generateNumbers() {
-			List<Integer> mainNumbers = HelperMethods.getRandomNumbers(5,1,39);
-			List<Integer> thunderBall = HelperMethods.getRandomNumbers(1,1,14);
+			List<Integer> mainNumbers = HelperMethods.getRandomNumbers(5,1,39); // 5 numbers from 1 to 39
+			Collections.sort(mainNumbers);
+			List<Integer> thunderBall = HelperMethods.getRandomNumbers(1,1,14); // 1 number from 1 to 14
 			List<Integer> newList = new ArrayList<>();
 			newList.addAll(mainNumbers);
 			newList.addAll(thunderBall);
@@ -142,6 +146,7 @@ public class LuckyDipGUI extends JPanel {
 		@Override
 		public List<Integer> generateNumbers() {
 			List<Integer> mainNumbers = HelperMethods.getRandomNumbers(6,1,59);
+			Collections.sort(mainNumbers);
 			return mainNumbers;
 		}
 	}
