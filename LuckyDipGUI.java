@@ -23,6 +23,8 @@ import java.awt.RenderingHints;
 import java.util.Collections;
 import javax.swing.JTextField;
 import javax.swing.JOptionPane;
+import javax.swing.Box;
+import java.awt.Dimension;
 
 public class LuckyDipGUI extends JPanel {
 	
@@ -42,17 +44,14 @@ public class LuckyDipGUI extends JPanel {
 	
 	public LuckyDipGUI() {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); // stack components vertically on top of each other
+		setBorder(BorderFactory.createEmptyBorder(20,20,20,20)); // add some space between the panel and the edges of window frame
 		
 		// lottery panels
 		JPanel euroMillionsPanel = new EuroMillionsLotteryPanel("EuroMillions: 5 numbers from 1 to 50 and 2 Lucky Stars from 1 to 12");
-		euroMillionsPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 		JPanel thunderballPanel = new ThunderballLotteryPanel("Thunderball: 5 numbers from 1 to 39 and 1 Thunderball from 1 to 14");
-		thunderballPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 		JPanel lottoPanel = new LottoLotteryPanel("Lotto: 6 numbers from 1 to 59");
-		lottoPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 		// random number generator
 		JLabel randomNumberGeneratorLabel = new JLabel("Random Number Generator");
-		randomNumberGeneratorLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 		JPanel randomNumberControlPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0)); 
 		randomNumberControlPanel.add(new JLabel("From: "));
 		minNumberTextField = new JTextField(5);
@@ -65,9 +64,19 @@ public class LuckyDipGUI extends JPanel {
 		randomNumberControlPanel.add(randomNumberButton);
 		randomNumberLabel = new JLabel("Number: ");
 		
+		// to get components to left align properly all components must
+		// have alignmentX set to LEFT_ALIGNMENT (see https://docs.oracle.com/javase/tutorial/uiswing/layout/box.html#alignment)
+		euroMillionsPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+		thunderballPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+		lottoPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+		randomNumberGeneratorLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+		randomNumberControlPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+		randomNumberLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+		
 		add(euroMillionsPanel);
 		add(thunderballPanel);
 		add(lottoPanel);
+		add(Box.createRigidArea(new Dimension(0,20))); // add a bit of space between lottery panels and number generator
 		add(randomNumberGeneratorLabel);
 		add(randomNumberControlPanel);
 		add(randomNumberLabel);
@@ -93,7 +102,7 @@ public class LuckyDipGUI extends JPanel {
 	
 	// -------------- lottery panels ------------------------------------
 	
-	// houses all of the stuff LotteryPanel's have in common
+	// This class houses all of the stuff LotteryPanels have in common
 	private abstract class LotteryPanel extends JPanel implements ActionListener {
 		
 		private JLabel titleLabel;
